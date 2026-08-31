@@ -1,26 +1,161 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---------------------------------------------------------------------------
+   Design tokens.
+   Ported once from rungtaHeartz/constants/colors.ts. This file is now the SINGLE
+   source of truth for colour on web — unlike the app, which duplicates the
+   palette across colors.ts and tailwind.config.js. If the brand changes, it is
+   changed here and, deliberately and separately, in the app.
+--------------------------------------------------------------------------- */
+@theme {
+  /* Brand — fills, buttons, accents. Matches the app exactly. */
+  --color-primary: #ff4d6d;
+  --color-primary-hover: #f43558;
+  --color-secondary: #ff8fab;
+  --color-accent: #ffb3c1;
+
+  /* Brand ink. #FF4D6D on #FFF0F3 is ~3.4:1 — it FAILS WCAG AA for body text.
+     Use --color-primary for fills and large display text only; use this
+     darkened variant (~5.9:1) any time brand colour carries small text. */
+  --color-primary-ink: #c81340;
+
+  /* Surfaces */
+  --color-bg: #fff0f3;
+  --color-surface: #ffffff;
+  --color-surface-muted: #fff7f9;
+  --color-border: #f4d9e0;
+
+  /* Text */
+  --color-ink: #2d2d2d;
+  --color-subtext: #6b6b6b; /* app used #888888 (3.5:1); darkened to pass AA */
+
+  /* Landing-page grounding tones.
+     All-pink reads as candy; the marketing page needs a register the app
+     itself doesn't. Navy is the academic half of "campus dating", paper is
+     the exam-answer-sheet cream, highlight is the pen students actually use. */
+  --color-navy: #1b2a4a;
+  --color-navy-soft: #2a3d64;
+  --color-paper: #fffaf2;
+  --color-highlight: #ffd84d;
+
+  /* Status */
+  --color-gold: #ffd700;
+  --color-gold-ink: #8a6d00;
+  --color-success: #2e7d32;
+  --color-danger: #d32f2f;
+
+  /* Type */
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Handwriting, used only on the confession slips. */
+  --font-hand: var(--font-kalam), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Radius */
+  --radius-card: 1.5rem;
+
+  /* Motion */
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    /* Nothing may ever scroll the body sideways. Enforced here, audited in Phase 7. */
+    overflow-x: hidden;
+  }
+
+  /* Brand-tinted focus ring, visible on every interactive element. */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Phase 7 promises this; wiring it at the base means every animation
+     added later inherits the courtesy instead of retrofitting it. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Slow sheen across the free-period cell — the only ambient motion on the
+     landing page. Disabled wholesale by the prefers-reduced-motion rule above. */
+  @keyframes sheen {
+    0%,
+    55% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Ruled notebook paper. */
+  .bg-ruled {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 31px,
+      rgba(27, 42, 74, 0.07) 31px,
+      rgba(27, 42, 74, 0.07) 32px
+    );
+  }
+
+  /* Graph paper, for the darker bands. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+
+  /* Marker swipe behind a word, sitting under the text like a real highlighter. */
+  .highlighted {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 58%,
+      var(--color-highlight) 58%,
+      var(--color-highlight) 92%,
+      transparent 92%
+    );
+  }
+
+  /* Real viewport height. NEVER use h-screen/100vh for app shells — mobile
+     Safari's collapsing URL bar clips the chat composer off the bottom. */
+  .h-dvh-safe {
+    height: 100dvh;
+  }
+  .min-h-dvh-safe {
+    min-height: 100dvh;
+  }
+  /* Home-indicator clearance for the fixed bottom tab bar. */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .mb-safe {
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
