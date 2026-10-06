@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { CompleteProfilePrompt } from "@/components/profile/CompleteProfilePrompt";
+import { ProfileIdSearch } from "@/components/swipe/ProfileIdSearch";
 import { QuotaCounter } from "@/components/swipe/QuotaNotice";
 import { PremiumUpsell } from "@/components/premium/PremiumUpsell";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -109,6 +110,7 @@ export default function DiscoverPage() {
           Discover
         </h1>
 
+        <ProfileIdSearch />
         <CompleteProfilePrompt />
         <QuotaCounter quota={quota} />
 

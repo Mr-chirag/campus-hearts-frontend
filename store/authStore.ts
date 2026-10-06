@@ -27,7 +27,6 @@ interface AuthState {
     bio?: string;
     interests?: string[];
     gender?: Gender;
-    interested_in?: Gender[];
   }) => Promise<void>;
   sendOtp: (email: string) => Promise<void>;
   verifyOtp: (email: string, otp: string) => Promise<string>;

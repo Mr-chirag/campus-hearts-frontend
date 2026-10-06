@@ -58,7 +58,6 @@ function EditProfileForm({ user }: { user: User }) {
   const [photos, setPhotos] = useState<string[]>(user.photos ?? []);
   const [interestDraft, setInterestDraft] = useState("");
   const [gender, setGender] = useState<Gender | null>(user.gender ?? null);
-  const [interestedIn, setInterestedIn] = useState<Gender[]>(user.interested_in ?? []);
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const [saving, setSaving] = useState(false);
 
@@ -105,7 +104,6 @@ function EditProfileForm({ user }: { user: User }) {
         interests,
         photos,
         ...(gender ? { gender } : {}),
-        interested_in: interestedIn,
       });
       router.push("/profile");
     } catch {
@@ -180,18 +178,12 @@ function EditProfileForm({ user }: { user: User }) {
         </Card>
 
         <Card>
-          <CardTitle className="mb-1">Who you are, who you want to meet</CardTitle>
+          <CardTitle className="mb-1">Gender</CardTitle>
           <p className="mb-5 text-sm leading-relaxed text-subtext">
-            Used to decide whose deck you appear in. The match has to go both
-            ways — you see people you&apos;re interested in who are also
-            interested in you.
+            This doesn&apos;t change who you see — Discover shows everyone on
+            campus.
           </p>
-          <GenderFields
-            gender={gender}
-            interestedIn={interestedIn}
-            onGenderChange={setGender}
-            onInterestedInChange={setInterestedIn}
-          />
+          <GenderFields gender={gender} onGenderChange={setGender} />
         </Card>
 
         <Card>

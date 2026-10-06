@@ -14,7 +14,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Campus Hearts",
     short_name: "Campus Hearts",
     description:
-      "Dating for verified students. Match with people who actually go to your college.",
+      "Campus Hearts is a campus people connecting platform. Verified students only.",
     start_url: "/discover",
     scope: "/",
     display: "standalone",

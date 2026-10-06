@@ -232,7 +232,6 @@ export function SignupWizard() {
         photos: [progress.photoUrl],
         registrationToken: progress.registrationToken,
         ...(progress.gender ? { gender: progress.gender } : {}),
-        interested_in: progress.interestedIn,
       });
       clearProgress();
       router.replace("/discover");
@@ -538,12 +537,10 @@ export function SignupWizard() {
             <div className="border-t border-border pt-5">
               <GenderFields
                 gender={progress.gender}
-                interestedIn={progress.interestedIn}
                 onGenderChange={(gender) => {
                   patch({ gender });
                   if (errors.gender) setErrors((p) => ({ ...p, gender: undefined }));
                 }}
-                onInterestedInChange={(interestedIn) => patch({ interestedIn })}
                 error={errors.gender}
               />
             </div>

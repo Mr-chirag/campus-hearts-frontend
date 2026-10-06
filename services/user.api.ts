@@ -1,5 +1,5 @@
 import { api } from "./api";
-import type { ProfileView, PublicUser } from "@/types";
+import type { ProfileSearchResult, ProfileView, PublicUser } from "@/types";
 
 export const userApi = {
   /**
@@ -10,6 +10,14 @@ export const userApi = {
    */
   getUserById: async (userId: string) => {
     const response = await api.get<PublicUser>(`/users/${userId}`);
+    return response.data;
+  },
+
+  /** Finds a profile by its short public ID. 404s when nobody has that ID. */
+  searchByProfileId: async (profileId: string) => {
+    const response = await api.get<ProfileSearchResult>("/users/search", {
+      params: { profile_id: profileId },
+    });
     return response.data;
   },
 

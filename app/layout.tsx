@@ -22,11 +22,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Campus Hearts — dating, for your campus only",
+    default: "Campus Hearts — connect with people on your campus",
     template: "%s · Campus Hearts",
   },
   description:
-    "A dating app just for verified students. Match with people who actually go to your college, send anonymous confessions, and meet someone between lectures.",
+    "Campus Hearts is a campus people connecting platform. Verified students only — meet people who actually go to your college, chat, and send anonymous confessions.",
   applicationName: "Campus Hearts",
   robots: { index: true, follow: true },
 

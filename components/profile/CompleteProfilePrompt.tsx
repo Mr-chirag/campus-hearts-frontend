@@ -6,13 +6,12 @@ import { Button } from "@/components/ui/Button";
 import { useAuthStore } from "@/store/authStore";
 
 /**
- * One-time nudge for accounts created before gender existed — and for anyone
- * who signed up through the Expo app, which doesn't collect it.
+ * Nudge for accounts created before gender existed — and for anyone who signed
+ * up through the Expo app, which doesn't collect it. Disappears the moment the
+ * field is filled in.
  *
- * Not dismissible, and deliberately so: without a gender the mutual orientation
- * filter can't run, so these users are shown to everyone and see everyone. That
- * isn't a cosmetic gap, it's the difference between a relevant deck and a
- * random one. It disappears the moment the field is filled in.
+ * Gender does NOT filter discovery (everyone sees everyone), so the copy must
+ * not promise a "better deck" — it only completes the profile.
  */
 export function CompleteProfilePrompt() {
   const user = useAuthStore((s) => s.user);
@@ -27,10 +26,10 @@ export function CompleteProfilePrompt() {
       </span>
 
       <div className="min-w-0 flex-1">
-        <p className="font-semibold text-ink">Get a better deck</p>
+        <p className="font-semibold text-ink">Finish your profile</p>
         <p className="mt-0.5 text-sm leading-relaxed text-subtext">
-          Tell us your gender and who you&apos;d like to meet, and we&apos;ll
-          stop showing you people you&apos;d never match with.
+          Add your gender — it takes a second. It won&apos;t change who you
+          see; Discover shows everyone on campus.
         </p>
       </div>
 

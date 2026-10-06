@@ -51,20 +51,20 @@ const hand = Kalam({
 });
 
 export const metadata: Metadata = {
-  title: "Campus Hearts — dating, for your campus only",
+  title: "Campus Hearts — connect with people on your campus",
   description:
-    "A dating app just for verified students. Match with people who actually go to your college, send anonymous confessions, and meet someone between lectures.",
+    "Campus Hearts is a campus people connecting platform. Verified students only — meet people who actually go to your college, chat, and send anonymous confessions.",
   openGraph: {
-    title: "Campus Hearts — dating, for your campus only",
+    title: "Campus Hearts — connect with people on your campus",
     description:
-      "Verified students only. Match, chat, and send anonymous confessions to people who actually go to your college.",
+      "Campus Hearts is a campus people connecting platform. Verified students only — meet, chat, and send anonymous confessions to people who actually go to your college.",
     type: "website",
     siteName: "Campus Hearts",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Campus Hearts — dating, for your campus only",
-    description: "Verified students only. Match with people who actually go to your college.",
+    title: "Campus Hearts — connect with people on your campus",
+    description: "Campus Hearts is a campus people connecting platform. Verified students only.",
   },
   alternates: { canonical: "/" },
 };
@@ -156,9 +156,9 @@ export default function LandingPage() {
               </h1>
 
               <p className="mx-auto mt-6 max-w-lg text-pretty text-lg leading-relaxed text-subtext lg:mx-0">
-                Campus Hearts is a dating app with one rule about who gets in:
-                a working college email. No bots, no strangers three cities
-                away, nobody pretending to be a student.
+                Campus Hearts is a campus people connecting platform, with one
+                rule about who gets in: a working college email. No bots, no
+                strangers three cities away, nobody pretending to be a student.
               </p>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">

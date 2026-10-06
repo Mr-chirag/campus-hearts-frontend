@@ -9,18 +9,23 @@
 /* User & auth                                                                */
 /* -------------------------------------------------------------------------- */
 
-/** Mirrors the enum in backend/models/userModel.js. */
+/**
+ * Mirrors the enum in backend/models/userModel.js. "non-binary" is no longer
+ * offered at signup but stays in the type because existing accounts hold it.
+ */
 export type Gender = "man" | "woman" | "non-binary" | "other";
 
+/** What signup and profile edit offer: Male / Female / Other. */
 export const GENDER_OPTIONS: { value: Gender; label: string }[] = [
-  { value: "man", label: "Man" },
-  { value: "woman", label: "Woman" },
-  { value: "non-binary", label: "Non-binary" },
-  { value: "other", label: "Prefer to self-describe" },
+  { value: "man", label: "Male" },
+  { value: "woman", label: "Female" },
+  { value: "other", label: "Other" },
 ];
 
 export interface User {
   _id: string;
+  /** Short public ID ("CH7K2Q9P") others can search for on Discover. */
+  profile_id?: string;
   full_name: string;
   email: string;
   semester: number;
@@ -33,8 +38,6 @@ export interface User {
   photos?: string[];
   /** null until the user fills it in — drives the "finish your profile" prompt. */
   gender?: Gender | null;
-  /** Empty means "no preference"; the feed then shows every gender. */
-  interested_in?: Gender[];
   is_active?: boolean;
   // Settings
   profile_paused?: boolean;
@@ -103,6 +106,7 @@ export type SwipeAction = "like" | "pass" | "superlike";
 
 export interface SwipeProfile {
   _id: string;
+  profile_id?: string;
   full_name: string;
   email: string;
   semester: number;
@@ -114,6 +118,9 @@ export interface SwipeProfile {
   is_premium: boolean;
   compatibility?: number;
 }
+
+/** One result of GET /api/users/search — a SwipeProfile without the email. */
+export type ProfileSearchResult = Omit<SwipeProfile, "email" | "compatibility">;
 
 /** The opaque sentinel the server sends instead of a real id when masked. */
 export const ANONYMOUS_ID = "anonymous" as const;

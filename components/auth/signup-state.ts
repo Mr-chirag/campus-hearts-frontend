@@ -30,7 +30,6 @@ export interface SignupProgress {
   semester: string;
   branch: string;
   gender: Gender | null;
-  interestedIn: Gender[];
   photoUrl: string | null;
 }
 
@@ -41,7 +40,6 @@ export const EMPTY_PROGRESS: SignupProgress = {
   semester: "",
   branch: "",
   gender: null,
-  interestedIn: [],
   photoUrl: null,
 };
 

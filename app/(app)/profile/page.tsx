@@ -11,6 +11,7 @@ import { Badge, PremiumBadge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card, CardTitle } from "@/components/ui/Card";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { ProfileIdBadge } from "@/components/profile/ProfileIdBadge";
 import { ProfileStrengthRing, STRENGTH_TIPS } from "@/components/profile/ProfileStrengthRing";
 import cloudinaryLoader, { isCloudinary } from "@/lib/cloudinary-loader";
 import { useAuthStore } from "@/store/authStore";
@@ -60,6 +61,14 @@ export default function ProfilePage() {
                 <Badge>{user.branch}</Badge>
                 {user.is_premium && <PremiumBadge />}
               </div>
+              {user.profile_id && (
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <ProfileIdBadge profileId={user.profile_id} />
+                  <span className="text-xs text-subtext">
+                    Share it so people can find you on Discover
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 

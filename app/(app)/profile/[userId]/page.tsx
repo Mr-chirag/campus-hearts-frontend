@@ -4,6 +4,7 @@ import Image from "next/image";
 import { use, useEffect } from "react";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { Avatar } from "@/components/ui/Avatar";
+import { ProfileIdBadge } from "@/components/profile/ProfileIdBadge";
 import { Badge, PremiumBadge } from "@/components/ui/Badge";
 import { Card, CardTitle } from "@/components/ui/Card";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -71,6 +72,7 @@ export default function PublicProfilePage({
                 <Badge>Semester {profile.semester}</Badge>
                 <Badge>{profile.branch}</Badge>
                 {profile.is_premium && <PremiumBadge />}
+                <ProfileIdBadge profileId={profile.profile_id} />
               </div>
             </div>
           </div>

@@ -41,7 +41,6 @@ export const authApi = {
     bio?: string;
     interests?: string[];
     gender?: Gender;
-    interested_in?: Gender[];
   }) => {
     const response = await api.post<AuthResponse>("/users", data);
     return response.data;
