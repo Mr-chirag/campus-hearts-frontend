@@ -121,3 +121,4 @@ Tracked in `../WEB_MIGRATION_PLAN.md`.
 - [x] **Phase 7** — PWA (installable), error boundaries, route skeletons, a11y, bundle split
 - [ ] Phase 8 — backend adaptation & deployment
 - [ ] Phase 9 — hardening, QA, launch
+Deployment sync
